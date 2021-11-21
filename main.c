@@ -27,7 +27,18 @@ int isEmpty(struct list *list)
 	return list->head == NULL ? 1 : 0;
 }
 
-void add(struct list *list, int val)
+void addFirst(struct list *list, int val)
+{
+	// create new node with val
+	struct node *newNode = (struct node*)malloc( sizeof(struct node) );
+	newNode->val  = val;
+	newNode->next = list->head;
+	
+	// make new node the new head in the list
+	list->head = newNode;
+}
+
+void addLast(struct list *list, int val)
 {
 	// create new node with val
 	struct node *newNode = (struct node*)malloc( sizeof(struct node) );
@@ -36,15 +47,15 @@ void add(struct list *list, int val)
 	
 	// make newNode the new tail in the list
 	if ( !isEmpty(list) )
-	{
 		list->tail->next = newNode;
-		list->tail       = newNode;
-	}
 	else
-	{
 		list->head = newNode;
-		list->tail = newNode;
-	}
+	list->tail = newNode;
+}
+
+void add(struct list *list, int val)
+{
+	addLast(list, val);
 }
 
 void printList(struct list *list)
@@ -82,7 +93,7 @@ int main(void)
 	do
 	{
 		scanf("%i", &input);
-		if (input) add(myList, input);
+		if (input) addFirst(myList, input);
 	}
 	while(input);
 	
