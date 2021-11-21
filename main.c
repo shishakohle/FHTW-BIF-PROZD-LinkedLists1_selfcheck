@@ -75,13 +75,12 @@ void clearList(struct list *list)
 
 	while( current != NULL )
 	{
-		free(current);
+		struct node *temp = current;
+		free(temp);
 		current = current->next;
 	}
 	
 	free(list);
-	
-	list = initList();
 }
 
 int main(void)
