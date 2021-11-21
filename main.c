@@ -76,8 +76,8 @@ void clearList(struct list *list)
 	while( current != NULL )
 	{
 		struct node *temp = current;
-		free(temp);
 		current = current->next;
+		free(temp);
 	}
 	
 	free(list);
